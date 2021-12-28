@@ -2,6 +2,7 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
+// header include guard
 #pragma once
 
 /**
@@ -13,20 +14,36 @@
  * command-specific namespaces within this header, which can then be used where
  * they are needed.
  */
+
+
+#define CURVATURE_DRIVE_MODE 0
+#define ARCADE_DRIVE_MODE 1
+
+// DriveConstants namespace is a location for all constants realted to the Drive subsystem
 namespace DriveConstants {
 
-    const int left_talon1 = 0;
-    const int left_talon2 = 1;
-    const int left_victor = 2;
+    // left motor controller IDs
+    const int left_talon1_id = 0;
+    const int left_talon2_id = 1;
+    const int left_victor_id = 2;
 
-    const int right_talon1 = 3;
-    const int right_talon2 = 4;
-    const int right_victor = 5;
+    // right motor controller IDs
+    const int right_talon1_id = 3;
+    const int right_talon2_id = 4;
+    const int right_victor_id = 5;
 
-    const int PCM_port0_forward = 0;
-    const int PCM_port0_reverse = 1;
+    // PCM shifter ports
+    const int PCM_shifter_forward = 0;
+    const int PCM_shifter_reverse = 1;
+
+    const int drive_mode = CURVATURE_DRIVE_MODE;
+
 }
+
+// ControllerConstants is a location for all constants related to the XboxController
 namespace ControllerConstants {
 
+    // the primary Xbox controller is connected on port 0
     const int driver_controller_port = 0;
+
 }

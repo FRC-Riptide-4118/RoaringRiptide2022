@@ -26,5 +26,6 @@ class Robot : public frc::TimedRobot {
   // doesn't have undefined behavior and potentially crash.
   frc2::Command* m_autonomousCommand = nullptr;
 
+  // Create a RobotContainer
   RobotContainer m_container;
 };
