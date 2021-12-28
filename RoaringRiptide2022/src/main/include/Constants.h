@@ -13,3 +13,20 @@
  * command-specific namespaces within this header, which can then be used where
  * they are needed.
  */
+namespace DriveConstants {
+
+    const int left_talon1 = 0;
+    const int left_talon2 = 1;
+    const int left_victor = 2;
+
+    const int right_talon1 = 3;
+    const int right_talon2 = 4;
+    const int right_victor = 5;
+
+    const int PCM_port0_forward = 0;
+    const int PCM_port0_reverse = 1;
+}
+namespace ControllerConstants {
+
+    const int driver_controller_port = 0;
+}

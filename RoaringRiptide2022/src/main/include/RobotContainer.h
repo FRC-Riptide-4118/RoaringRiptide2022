@@ -5,8 +5,10 @@
 #pragma once
 
 #include <frc2/command/Command.h>
-
+#include <subsystems/Drive.h>
 #include <frc/XboxController.h>
+#include "Constants.h"
+#include <commands/DefaultDrive.h>
 
 /**
  * This class is where the bulk of the robot should be declared.  Since
@@ -22,6 +24,10 @@ class RobotContainer {
   frc2::Command* GetAutonomousCommand();
 
  private:
+
+  Drive m_drive;
+
+  frc::XboxController driver_controller{ControllerConstants::driver_controller_port};
 
   void ConfigureButtonBindings();
 
