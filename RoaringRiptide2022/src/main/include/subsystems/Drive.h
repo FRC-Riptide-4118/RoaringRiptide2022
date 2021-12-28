@@ -5,6 +5,7 @@
 #pragma once
 
 #include <frc2/command/SubsystemBase.h>
+#include "ctre/Phoenix.h"
 
 class Drive : public frc2::SubsystemBase {
  public:
