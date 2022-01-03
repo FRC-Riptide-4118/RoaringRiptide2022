@@ -37,7 +37,6 @@ namespace DriveConstants {
     const int PCM_shifter_reverse = 1;
 
     const int drive_mode = CURVATURE_DRIVE_MODE;
-
 }
 
 // ControllerConstants is a location for all constants related to the XboxController
@@ -46,4 +45,11 @@ namespace ControllerConstants {
     // the primary Xbox controller is connected on port 0
     const int driver_controller_port = 0;
 
+}
+
+namespace DriveToDistanceConstants {
+
+    const double kP = 0.0;
+    const double kI = 0.0;
+    const double kD = 0.0;
 }
