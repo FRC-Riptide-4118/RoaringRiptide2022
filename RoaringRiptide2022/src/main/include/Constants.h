@@ -52,4 +52,10 @@ namespace DriveToDistanceConstants {
     const double kP = 0.0;
     const double kI = 0.0;
     const double kD = 0.0;
+
+    const int error = 0;
+    const int derivative = 0;
+    const int prevError = 0;
+    const int totalError = 0;
+
 }
