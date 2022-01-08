@@ -36,6 +36,13 @@ namespace DriveConstants {
     const int PCM_shifter_forward = 0;
     const int PCM_shifter_reverse = 1;
 
+    // drive PID coefficients
+    const double kF = 0;
+    const double kP = 0.03;
+    const double kI = 0.0;
+    const double kD = 0.0;
+
+    // control drive mode (either curvature or arcade)
     const int drive_mode = CURVATURE_DRIVE_MODE;
 }
 
@@ -44,18 +51,5 @@ namespace ControllerConstants {
 
     // the primary Xbox controller is connected on port 0
     const int driver_controller_port = 0;
-
-}
-
-namespace DriveToDistanceConstants {
-
-    const double kP = 0.0;
-    const double kI = 0.0;
-    const double kD = 0.0;
-
-    const int error = 0;
-    const int derivative = 0;
-    const int prevError = 0;
-    const int totalError = 0;
 
 }

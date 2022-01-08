@@ -25,19 +25,23 @@ Drive::Drive() {
     left_talon1.ConfigSelectedFeedbackSensor(FeedbackDevice::CTRE_MagEncoder_Relative);
     right_talon1.ConfigSelectedFeedbackSensor(FeedbackDevice::CTRE_MagEncoder_Relative);
 
+    // set the current encoder value to 0
     left_talon1.SetSelectedSensorPosition(0);
     right_talon1.SetSelectedSensorPosition(0);
 
-    left_talon1.Config_kF(0, 0);
-    left_talon1.Config_kP(0, 0.03);
-    left_talon1.Config_kI(0, 0);
-    left_talon1.Config_kD(0, 0);
+    // set left PID coefficients for motor controllers
+    left_talon1.Config_kF(DriveConstants::left_talon1_id, DriveConstants::kF);
+    left_talon1.Config_kP(DriveConstants::left_talon1_id, DriveConstants::kP);
+    left_talon1.Config_kI(DriveConstants::left_talon1_id, DriveConstants::kI);
+    left_talon1.Config_kD(DriveConstants::left_talon1_id, DriveConstants::kD);
 
-    right_talon1.Config_kF(0, 0);
-    right_talon1.Config_kP(0, 0.03);
-    right_talon1.Config_kI(0, 0);
-    right_talon1.Config_kD(0, 0);
+    // set right PID coefficients for motor controllers
+    right_talon1.Config_kF(DriveConstants::right_talon1_id, DriveConstants::kF);
+    right_talon1.Config_kP(DriveConstants::right_talon1_id, DriveConstants::kP);
+    right_talon1.Config_kI(DriveConstants::right_talon1_id, DriveConstants::kI);
+    right_talon1.Config_kD(DriveConstants::right_talon1_id, DriveConstants::kD);
 
+    // disable sensor phase sensing
     left_talon1.SetSensorPhase(false);
     right_talon1.SetSensorPhase(false);
 
@@ -61,10 +65,14 @@ void Drive::SetLowGear() {
     
 }
 
-// TODO: implement functionality
-void Drive::ResetEncoder() {}
+void Drive::ResetEncoder() {
 
-// TODO: implement functionality
+    // reset encoders to position 0
+    left_talon1.SetSelectedSensorPosition(0);
+    right_talon1.SetSelectedSensorPosition(0);
+
+}
+
 void Drive::DriveToDistance(double setpoint) {
 
     left_talon1.Set(ControlMode::Position, -setpoint);
