@@ -22,6 +22,24 @@ Drive::Drive() {
 
     // disable safety to avoid weird errors
     drive.SetSafetyEnabled(false);
+    left_talon1.ConfigSelectedFeedbackSensor(FeedbackDevice::CTRE_MagEncoder_Relative);
+    right_talon1.ConfigSelectedFeedbackSensor(FeedbackDevice::CTRE_MagEncoder_Relative);
+
+    left_talon1.SetSelectedSensorPosition(0);
+    right_talon1.SetSelectedSensorPosition(0);
+
+    left_talon1.Config_kF(0, 0);
+    left_talon1.Config_kP(0, 0.03);
+    left_talon1.Config_kI(0, 0);
+    left_talon1.Config_kD(0, 0);
+
+    right_talon1.Config_kF(0, 0);
+    right_talon1.Config_kP(0, 0.03);
+    right_talon1.Config_kI(0, 0);
+    right_talon1.Config_kD(0, 0);
+
+    left_talon1.SetSensorPhase(false);
+    right_talon1.SetSensorPhase(false);
 
 }
 
