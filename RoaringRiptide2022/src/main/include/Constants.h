@@ -16,8 +16,12 @@
  */
 
 
+#include "PID_Coefficients.h"
+
 #define CURVATURE_DRIVE_MODE 0
 #define ARCADE_DRIVE_MODE 1
+
+#define ROBORIO_LOOP_PERIOD 0.02_s // corresponds to a frequency of 50Hz
 
 // DriveConstants namespace is a location for all constants realted to the Drive subsystem
 namespace DriveConstants {
@@ -37,13 +41,12 @@ namespace DriveConstants {
     const int PCM_shifter_reverse = 1;
 
     // drive PID coefficients
-    const double kF = 0;
-    const double kP = 0.03;
-    const double kI = 0.0;
-    const double kD = 0.0;
+    const PID_Coefficients drive_PID_coefficients(0, 0.03, 0, 0);
 
     // control drive mode (either curvature or arcade)
     const int drive_mode = CURVATURE_DRIVE_MODE;
+
+    const double encoder_filter_cutoff_frequency = 0.1;
 }
 
 // ControllerConstants is a location for all constants related to the XboxController

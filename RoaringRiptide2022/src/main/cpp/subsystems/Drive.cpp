@@ -33,16 +33,16 @@ Drive::Drive() {
     right_talon1.SetSelectedSensorPosition(0);
 
     // set left PID coefficients for motor controllers
-    left_talon1.Config_kF(DriveConstants::left_talon1_id, DriveConstants::kF);
-    left_talon1.Config_kP(DriveConstants::left_talon1_id, DriveConstants::kP);
-    left_talon1.Config_kI(DriveConstants::left_talon1_id, DriveConstants::kI);
-    left_talon1.Config_kD(DriveConstants::left_talon1_id, DriveConstants::kD);
+    left_talon1.Config_kF(DriveConstants::left_talon1_id, DriveConstants::drive_PID_coefficients.kF);
+    left_talon1.Config_kP(DriveConstants::left_talon1_id, DriveConstants::drive_PID_coefficients.kP);
+    left_talon1.Config_kI(DriveConstants::left_talon1_id, DriveConstants::drive_PID_coefficients.kI);
+    left_talon1.Config_kD(DriveConstants::left_talon1_id, DriveConstants::drive_PID_coefficients.kD);
 
     // set right PID coefficients for motor controllers
-    right_talon1.Config_kF(DriveConstants::right_talon1_id, DriveConstants::kF);
-    right_talon1.Config_kP(DriveConstants::right_talon1_id, DriveConstants::kP);
-    right_talon1.Config_kI(DriveConstants::right_talon1_id, DriveConstants::kI);
-    right_talon1.Config_kD(DriveConstants::right_talon1_id, DriveConstants::kD);
+    right_talon1.Config_kF(DriveConstants::right_talon1_id, DriveConstants::drive_PID_coefficients.kF);
+    right_talon1.Config_kP(DriveConstants::right_talon1_id, DriveConstants::drive_PID_coefficients.kP);
+    right_talon1.Config_kI(DriveConstants::right_talon1_id, DriveConstants::drive_PID_coefficients.kI);
+    right_talon1.Config_kD(DriveConstants::right_talon1_id, DriveConstants::drive_PID_coefficients.kD);
 
     // disable sensor phase sensing
     left_talon1.SetSensorPhase(false);
@@ -52,7 +52,11 @@ Drive::Drive() {
 
 // This method will be called once per scheduler run
 // No implementation necessary
-void Drive::Periodic() {}
+void Drive::Periodic() {
+
+    encoder_filter.Calculate( left_talon1.GetSelectedSensorVelocity() );
+
+}
 
 void Drive::SetHighGear() {
 
@@ -73,6 +77,13 @@ void Drive::ResetEncoder() {
     // reset encoders to position 0
     left_talon1.SetSelectedSensorPosition(0);
     right_talon1.SetSelectedSensorPosition(0);
+
+}
+
+double Drive::GetVelocity() {
+
+    // get the filtered velocity of just the left side
+    return encoder_filter.Calculate( left_talon1.GetSelectedSensorVelocity() );
 
 }
 

@@ -10,6 +10,7 @@
 #include <frc/SpeedControllerGroup.h>
 #include <frc/drive/DifferentialDrive.h>
 #include <frc/DoubleSolenoid.h>
+#include <frc/LinearFilter.h>
 // CTRE/Phoenix include
 #include "ctre/Phoenix.h"
 // all other includes
@@ -33,6 +34,8 @@ class Drive : public frc2::SubsystemBase {
   void SetLowGear();
   // ResetEncoder will set both left and right encoders to 0
   void ResetEncoder();
+  // Get the current (filtered) velocity
+  double GetVelocity();
   // DriveToDistance will use PID control and encoders to drive a specific distance in a straight line
   void DriveToDistance(double setpoint);
 
@@ -52,5 +55,7 @@ class Drive : public frc2::SubsystemBase {
   frc::DifferentialDrive drive{left, right};
   // The gear shift can be viewed as an abstraction of a double solenoid
   frc::DoubleSolenoid shifter{DriveConstants::PCM_shifter_forward, DriveConstants::PCM_shifter_reverse};
+  // filter for retrieving encoder information
+  frc::LinearFilter<double> encoder_filter = frc::LinearFilter<double>::SinglePoleIIR(DriveConstants::encoder_filter_cutoff_frequency, ROBORIO_LOOP_PERIOD);
 
 };

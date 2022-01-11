@@ -8,6 +8,7 @@
 // all frc/frc2 includes
 #include <frc2/command/CommandBase.h>
 #include <frc2/command/CommandHelper.h>
+#include <frc/LinearFilter.h>
 // all subsystem includes
 #include <subsystems/Drive.h>
 
