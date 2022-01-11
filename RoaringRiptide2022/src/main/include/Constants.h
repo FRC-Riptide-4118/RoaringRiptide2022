@@ -16,7 +16,7 @@
  */
 
 
-#include "PID_Coefficients.h"
+#include "user_defined/PID_Coefficients.h"
 
 #define CURVATURE_DRIVE_MODE 0
 #define ARCADE_DRIVE_MODE 1
@@ -47,6 +47,8 @@ namespace DriveConstants {
     const int drive_mode = CURVATURE_DRIVE_MODE;
 
     const double encoder_filter_cutoff_frequency = 0.1;
+
+    const auto track_width = 30_in;
 }
 
 // ControllerConstants is a location for all constants related to the XboxController

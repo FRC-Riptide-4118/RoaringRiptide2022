@@ -87,6 +87,13 @@ double Drive::GetVelocity() {
 
 }
 
+frc::DifferentialDriveWheelSpeeds Drive::GetWheelSpeeds(frc::ChassisSpeeds chs_spd) {
+
+    // return the result of converting the chassis speed info into individual wheel speed info
+    return drive_kinematics.ToWheelSpeeds(chs_spd);
+
+}
+
 void Drive::DriveToDistance(double setpoint) {
 
     left_talon1.Set(ControlMode::Position, -setpoint);

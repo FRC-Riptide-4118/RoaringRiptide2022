@@ -11,6 +11,9 @@
 #include <frc/drive/DifferentialDrive.h>
 #include <frc/DoubleSolenoid.h>
 #include <frc/LinearFilter.h>
+#include <frc/kinematics/DifferentialDriveKinematics.h>
+#include <frc/kinematics/DifferentialDriveWheelSpeeds.h>
+#include <frc/kinematics/ChassisSpeeds.h>
 // CTRE/Phoenix include
 #include "ctre/Phoenix.h"
 // all other includes
@@ -36,6 +39,8 @@ class Drive : public frc2::SubsystemBase {
   void ResetEncoder();
   // Get the current (filtered) velocity
   double GetVelocity();
+  // Get wheel speeds from drive kinematics definition (convert linear + angular velocity of chassis into left + right velocity)
+  frc::DifferentialDriveWheelSpeeds GetWheelSpeeds(frc::ChassisSpeeds chs_spd);
   // DriveToDistance will use PID control and encoders to drive a specific distance in a straight line
   void DriveToDistance(double setpoint);
 
@@ -55,6 +60,8 @@ class Drive : public frc2::SubsystemBase {
   frc::DifferentialDrive drive{left, right};
   // The gear shift can be viewed as an abstraction of a double solenoid
   frc::DoubleSolenoid shifter{DriveConstants::PCM_shifter_forward, DriveConstants::PCM_shifter_reverse};
+  // DifferentialDrive kinematics object
+  frc::DifferentialDriveKinematics drive_kinematics{DriveConstants::track_width};
   // filter for retrieving encoder information
   frc::LinearFilter<double> encoder_filter = frc::LinearFilter<double>::SinglePoleIIR(DriveConstants::encoder_filter_cutoff_frequency, ROBORIO_LOOP_PERIOD);
 
