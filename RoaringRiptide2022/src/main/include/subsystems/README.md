@@ -8,4 +8,4 @@ This subsystem is in charge of controlling the robots general mobility. The core
 - SetHighGear: for robots with a shifting gearbox, this will set the high gear
 - SetLowGear: for robots with a shifting gearbox, this will set the low gear
 - ResetEncoder: this will set the encoders position to 0. Useful for mitigating accumulated error
-- DriveToDistance: this function will drive the robot a specific distance along a line (no ability to change orientation.)
+- DriveToDistance: this function will drive the robot a specific distance along a line (no ability to change orientation)
