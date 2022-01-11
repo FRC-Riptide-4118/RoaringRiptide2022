@@ -7,10 +7,10 @@
 
 // all frc/frc2 includes
 #include <frc2/command/SubsystemBase.h>
-#include <frc/SpeedControllerGroup.h>
+#include <frc/motorcontrol/MotorControllerGroup.h>
 #include <frc/drive/DifferentialDrive.h>
 #include <frc/DoubleSolenoid.h>
-#include <frc/LinearFilter.h>
+#include <frc/filter/LinearFilter.h>
 #include <frc/kinematics/DifferentialDriveKinematics.h>
 #include <frc/kinematics/DifferentialDriveWheelSpeeds.h>
 #include <frc/kinematics/ChassisSpeeds.h>
@@ -54,12 +54,12 @@ class Drive : public frc2::SubsystemBase {
   WPI_TalonSRX right_talon2 = {DriveConstants::right_talon2_id};
   WPI_VictorSPX right_victor = {DriveConstants::right_victor_id};
   // The left and right motor controllers are turned into SpeedControllerGroups
-  frc::SpeedControllerGroup left{left_talon1, left_talon2, left_victor};
-  frc::SpeedControllerGroup right{right_talon1, right_talon2, right_victor};
-  // The SpeedControllerGroups form a DifferentialDrive
+  frc::MotorControllerGroup left{left_talon1, left_talon2, left_victor};
+  frc::MotorControllerGroup right{right_talon1, right_talon2, right_victor};
+  // The MotorControllerGroups form a DifferentialDrive
   frc::DifferentialDrive drive{left, right};
   // The gear shift can be viewed as an abstraction of a double solenoid
-  frc::DoubleSolenoid shifter{DriveConstants::PCM_shifter_forward, DriveConstants::PCM_shifter_reverse};
+  frc::DoubleSolenoid shifter{ frc::PneumaticsModuleType::CTREPCM, DriveConstants::PCM_shifter_forward, DriveConstants::PCM_shifter_reverse };
   // DifferentialDrive kinematics object
   frc::DifferentialDriveKinematics drive_kinematics{DriveConstants::track_width};
   // filter for retrieving encoder information

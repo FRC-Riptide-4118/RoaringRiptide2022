@@ -9,7 +9,7 @@ RobotContainer::RobotContainer() {
 
   // Set up the Drive subsystem to have a default command that allows it to be driven via Xbox controller
   // Required the use of lambda functions to set up
-  m_drive.SetDefaultCommand( DefaultDrive{ &m_drive, [this] {return driver_controller.GetY(frc::GenericHID::JoystickHand::kLeftHand); }, [this] {return driver_controller.GetX(frc::GenericHID::JoystickHand::kRightHand); } } );
+  m_drive.SetDefaultCommand( DefaultDrive{ &m_drive, [this] {return driver_controller.GetLeftY(); }, [this] {return driver_controller.GetRightX(); } } );
 
   // Configure the button bindings
   ConfigureButtonBindings();
