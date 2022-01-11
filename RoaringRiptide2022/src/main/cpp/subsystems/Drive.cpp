@@ -12,6 +12,9 @@ Drive::Drive() {
     left_talon1.ConfigFactoryDefault();
     right_talon1.ConfigFactoryDefault();
 
+    // As of 2022, DifferentialDrive no longer automatically inverts direction
+    right.SetInverted(true);
+
     // left motor controllers always follow left_talon1
     left_talon2.Follow(left_talon1);
     left_victor.Follow(left_talon1);
@@ -62,7 +65,7 @@ void Drive::SetLowGear() {
 
     // retract piston to set low gear
     shifter.Set(frc::DoubleSolenoid::kReverse);
-    
+
 }
 
 void Drive::ResetEncoder() {
