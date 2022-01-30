@@ -14,8 +14,7 @@
  * command-specific namespaces within this header, which can then be used where
  * they are needed.
  */
-
-
+#include <units/length.h>
 #include "user_defined/PID_Coefficients.h"
 
 #define CURVATURE_DRIVE_MODE 0
@@ -36,10 +35,6 @@ namespace DriveConstants {
     const int right_talon2_id = 4;
     const int right_victor_id = 5;
 
-    // PCM shifter ports
-    const int PCM_shifter_forward = 0;
-    const int PCM_shifter_reverse = 1;
-
     // drive PID coefficients
     const PID_Coefficients drive_PID_coefficients(0, 0.03, 0, 0);
 
@@ -49,6 +44,29 @@ namespace DriveConstants {
     const double encoder_filter_cutoff_frequency = 0.1;
 
     const auto track_width = 30_in;
+}
+
+// IntakeConstants is a location for all constants related to the Intake
+namespace IntakeConstants {
+
+    const int motor_controller_id = 0;
+    const int PCM_intake_arm_forward = 0;
+    const int PCM_intake_arm_reverse = 0;
+
+}
+
+// TransferConstants is a location for all constants related to the Transfer
+namespace TransferConstants {
+
+    const int motor_controller_id = 0;
+
+}
+
+namespace LauncherConstants {
+
+    const int motor_controller_id = 0;
+    const PID_Coefficients launcher_PID_coefficients(0, 0.03, 0, 0);
+
 }
 
 // ControllerConstants is a location for all constants related to the XboxController

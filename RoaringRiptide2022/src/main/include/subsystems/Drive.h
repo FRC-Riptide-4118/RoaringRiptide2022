@@ -9,7 +9,6 @@
 #include <frc2/command/SubsystemBase.h>
 #include <frc/motorcontrol/MotorControllerGroup.h>
 #include <frc/drive/DifferentialDrive.h>
-#include <frc/DoubleSolenoid.h>
 #include <frc/filter/LinearFilter.h>
 #include <frc/kinematics/DifferentialDriveKinematics.h>
 #include <frc/kinematics/DifferentialDriveWheelSpeeds.h>
@@ -31,10 +30,6 @@ class Drive : public frc2::SubsystemBase {
   void CurvatureDrive(double forward, double rotate);
   // Arcade drive implementation
   void ArcadeDrive(double forward, double rotate);
-  // SetHighGear will shift drivetrain into high gear
-  void SetHighGear();
-  // SetLowGear will shift drivetrain into low gear
-  void SetLowGear();
   // ResetEncoder will set both left and right encoders to 0
   void ResetEncoder();
   // Get the current (filtered) velocity
@@ -58,8 +53,6 @@ class Drive : public frc2::SubsystemBase {
   frc::MotorControllerGroup right{right_talon1, right_talon2, right_victor};
   // The MotorControllerGroups form a DifferentialDrive
   frc::DifferentialDrive drive{left, right};
-  // The gear shift can be viewed as an abstraction of a double solenoid
-  frc::DoubleSolenoid shifter{ frc::PneumaticsModuleType::CTREPCM, DriveConstants::PCM_shifter_forward, DriveConstants::PCM_shifter_reverse };
   // DifferentialDrive kinematics object
   frc::DifferentialDriveKinematics drive_kinematics{DriveConstants::track_width};
   // filter for retrieving encoder information

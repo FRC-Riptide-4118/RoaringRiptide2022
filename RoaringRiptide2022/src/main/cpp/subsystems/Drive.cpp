@@ -58,20 +58,6 @@ void Drive::Periodic() {
 
 }
 
-void Drive::SetHighGear() {
-
-    // extend piston to set high gear
-    shifter.Set(frc::DoubleSolenoid::kForward);
-
-}
-
-void Drive::SetLowGear() {
-
-    // retract piston to set low gear
-    shifter.Set(frc::DoubleSolenoid::kReverse);
-
-}
-
 void Drive::ResetEncoder() {
 
     // reset encoders to position 0
@@ -104,8 +90,6 @@ void Drive::CurvatureDrive(double forward, double rotate) {
 
     // call curvature drive on the DifferentialDrive object (with quick turn set to false)
     drive.CurvatureDrive(forward, rotate, false);
-    // set low gear perpetually
-    this->SetLowGear();
 
 }
 
@@ -113,6 +97,5 @@ void Drive::ArcadeDrive(double forward, double rotate) {
 
     // call arcade drive on DifferentialDrive object
     drive.ArcadeDrive(forward, rotate);
-    // set low gear perpetually
-    this->SetLowGear();
+
 }
