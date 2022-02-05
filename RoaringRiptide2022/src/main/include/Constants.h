@@ -69,6 +69,12 @@ namespace LauncherConstants {
 
 }
 
+namespace ClimberConstants {
+    const int motor_controller_id = 0;
+    const int motor_controller_id = 1;
+
+}
+
 // ControllerConstants is a location for all constants related to the XboxController
 namespace ControllerConstants {
 
