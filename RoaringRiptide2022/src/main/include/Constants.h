@@ -26,14 +26,14 @@
 namespace DriveConstants {
 
     // left motor controller IDs
-    const int left_talon1_id = 0;
-    const int left_talon2_id = 1;
-    const int left_victor_id = 2;
+    const int left_talon_id = 0;
+    const int left_victor1_id = 4;
+    const int left_victor2_id = 5;
 
     // right motor controller IDs
-    const int right_talon1_id = 3;
-    const int right_talon2_id = 4;
-    const int right_victor_id = 5;
+    const int right_talon_id = 1;
+    const int right_victor1_id = 2;
+    const int right_victor2_id = 3;
 
     // drive PID coefficients
     const PID_Coefficients drive_PID_coefficients(0, 0.03, 0, 0);

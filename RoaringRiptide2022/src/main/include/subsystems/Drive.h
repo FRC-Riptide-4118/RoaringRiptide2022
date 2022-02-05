@@ -41,16 +41,16 @@ class Drive : public frc2::SubsystemBase {
 
  private:
   // All of the left motor controllers are defined here
-  WPI_TalonSRX left_talon1 = {DriveConstants::left_talon1_id};
-  WPI_TalonSRX left_talon2 = {DriveConstants::left_talon2_id};
-  WPI_VictorSPX left_victor = {DriveConstants::left_victor_id};
+  WPI_TalonSRX left_talon = {DriveConstants::left_talon_id};
+  WPI_VictorSPX left_victor1 = {DriveConstants::left_victor1_id};
+  WPI_VictorSPX left_victor2 = {DriveConstants::left_victor2_id};
   // All of the right motor controllers are declared here
-  WPI_TalonSRX right_talon1 = {DriveConstants::right_talon1_id};
-  WPI_TalonSRX right_talon2 = {DriveConstants::right_talon2_id};
-  WPI_VictorSPX right_victor = {DriveConstants::right_victor_id};
+  WPI_TalonSRX right_talon = {DriveConstants::right_talon_id};
+  WPI_VictorSPX right_victor1 = {DriveConstants::right_victor1_id};
+  WPI_VictorSPX right_victor2 = {DriveConstants::right_victor2_id};
   // The left and right motor controllers are turned into SpeedControllerGroups
-  frc::MotorControllerGroup left{left_talon1, left_talon2, left_victor};
-  frc::MotorControllerGroup right{right_talon1, right_talon2, right_victor};
+  frc::MotorControllerGroup left{left_talon, left_victor1, left_victor2};
+  frc::MotorControllerGroup right{right_talon, right_victor1, right_victor2};
   // The MotorControllerGroups form a DifferentialDrive
   frc::DifferentialDrive drive{left, right};
   // DifferentialDrive kinematics object
