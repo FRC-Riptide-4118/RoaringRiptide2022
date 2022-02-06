@@ -4,31 +4,70 @@
 
 #include "subsystems/Climber.h"
 
-Transfer::Transfer() = default;
+Climber::Climber() {
+
+    this->left_servo.Set(0);
+    this->right_servo.Set(0);
+
+}
 
 // This method will be called once per scheduler run
 void Climber::Periodic() {}
 
-void Climber::RaiseLeftClimber(double setpoint) {
+void Climber::LowerClimber(void) {
 
-    this->climber_left_motor.Set(ControlMode::PercentOutput, setpoint);
+    this->left_servo.Set(0);
+    this->right_servo.Set(0);
+
+    if (this->bottom_left_limit_switch.Get()) {
+
+        this->climber_left_motor.Set(ControlMode::PercentOutput, 0);
+
+    }
+    else {
+
+        this->climber_left_motor.Set(ControlMode::PercentOutput, -ClimberConstants::climber_speed);
+
+    }
+
+    if (this->bottom_right_limit_switch.Get()) {
+
+        this->climber_right_motor.Set(ControlMode::PercentOutput, 0);
+
+    }
+    else {
+
+        this->climber_right_motor.Set(ControlMode::PercentOutput, -ClimberConstants::climber_speed);
+
+    }
 
 }
 
-void Climber::RaiseRightClimber(double setpoint) {
+void Climber::RaiseClimber(void) {
 
-    this->climber_right_motor.Set(ControlMode::PercentOutput, setpoint);
+    this->left_servo.Set(ClimberConstants::servo_hold_value);
+    this->right_servo.Set(ClimberConstants::servo_hold_value);
 
-}
+    if (this->top_left_limit_switch.Get()) {
 
-void Climber::LowerRightClimber(double setpoint) {
+        this->climber_left_motor.Set(ControlMode::PercentOutput, 0);
 
-    this->climber_right_motor.Set(ControlMode::PercentOutput, -setpoint);
+    }
+    else {
 
-}
+        this->climber_left_motor.Set(ControlMode::PercentOutput, ClimberConstants::climber_speed);
 
-void Climber::LowerLeftClimber(double setpoint) {
+    }
 
-    this->climber_left_motor.Set(ControlMode::PercentOutput, -setpoint);
+    if (this->top_right_limit_switch.Get()) {
+
+        this->climber_right_motor.Set(ControlMode::PercentOutput, 0);
+
+    }
+    else {
+
+        this->climber_right_motor.Set(ControlMode::PercentOutput, ClimberConstants::climber_speed);
+
+    }
 
 }

@@ -70,8 +70,21 @@ namespace LauncherConstants {
 }
 
 namespace ClimberConstants {
-    const int motor_controller_id = 0;
-    const int motor_controller_id = 1;
+
+    const int left_climber_motor_id = 0;
+    const int right_climber_motor_id = 1;
+
+    const int top_left_limit_switch_port = 0;
+    const int bottom_left_limit_switch_port = 1;
+    const int top_right_limit_switch_port = 2;
+    const int bottom_right_limit_switch_port = 3;
+
+    const int left_servo_port = 0;
+    const int right_servo_port = 1;
+
+    const double servo_hold_value = 0.5;
+
+    const double climber_speed = 0.5;
 
 }
 
