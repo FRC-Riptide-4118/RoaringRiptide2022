@@ -11,3 +11,18 @@ This subsystem is in charge of controlling the robots general mobility. The core
 - DriveToDistance: this function will drive the robot a specific distance along a line (no ability to change orientation)
 - GetVelocity: this will return the left speed controllers (filtered!) velocity. Primarily for testing purposes
 - GetWheelSpeeds: this will return a set of left and right wheel speeds based on a linear and angular velocity of the differential drive
+
+### Intake Subsystem
+TODO
+
+### Transfer Subsystem
+TODO
+
+### Launcher Subsystem
+TODO
+
+### Climber Subsystem
+TODO
+
+### Limelight Subsystem
+TODO
