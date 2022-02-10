@@ -9,14 +9,14 @@ Transfer::Transfer() = default;
 // This method will be called once per scheduler run
 void Transfer::Periodic() {}
 
-void Transfer::TransferFoward(double setpoint) {
+void Transfer::TransferFoward(void) {
 
-    this->transfer_motor.Set(ControlMode::PercentOutput, setpoint);
+    this->transfer_motor.Set(ControlMode::PercentOutput, TransferConstants::transfer_speed);
 
 }
 
-void Transfer::TransferBackward(double setpoint) {
+void Transfer::TransferBackward(void) {
 
-    this->transfer_motor.Set(ControlMode::PercentOutput, -setpoint);
+    this->transfer_motor.Set(ControlMode::PercentOutput, -TransferConstants::transfer_speed);
 
 }

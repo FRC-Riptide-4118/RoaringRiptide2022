@@ -15,7 +15,12 @@ RobotContainer::RobotContainer() {
   ConfigureButtonBindings();
 }
 
-void RobotContainer::ConfigureButtonBindings() {}
+void RobotContainer::ConfigureButtonBindings() {
+
+  a_button.WhileHeld( &run_transfer_forward );
+  b_button.WhileHeld( &run_transfer_backwards );
+
+}
 
 // TODO: Implement functionality when autonomous modes are added
 frc2::Command* RobotContainer::GetAutonomousCommand() {

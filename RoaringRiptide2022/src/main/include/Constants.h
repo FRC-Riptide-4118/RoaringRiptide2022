@@ -60,6 +60,8 @@ namespace TransferConstants {
 
     const int motor_controller_id = 0;
 
+    const double transfer_speed = 0.5;
+
 }
 
 namespace LauncherConstants {
@@ -93,5 +95,8 @@ namespace ControllerConstants {
 
     // the primary Xbox controller is connected on port 0
     const int driver_controller_port = 0;
+
+    const int a_button_port = 0;
+    const int b_button_port = 1;
 
 }

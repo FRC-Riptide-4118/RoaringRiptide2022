@@ -8,8 +8,11 @@
 // all frc/frc2 includes
 #include <frc/XboxController.h>
 #include <frc2/command/Command.h>
+#include <frc2/command/RunCommand.h>
+#include <frc2/command/button/JoystickButton.h>
 // all subsystem includes
 #include <subsystems/Drive.h>
+#include <subsystems/Transfer.h>
 // all command includes
 #include <commands/DefaultDrive.h>
 // all other includes
@@ -35,9 +38,18 @@ class RobotContainer {
  private:
   // Drive subsystem
   Drive m_drive;
+  // Transfer subsystem
+  Transfer m_transfer;
+
+  // various lambda functions to define commands
+  frc2::RunCommand run_transfer_forward{ [this] { m_transfer.TransferFoward(); }, {&m_transfer} };
+  frc2::RunCommand run_transfer_backwards{ [this] { m_transfer.TransferBackward(); }, {&m_transfer} };
 
   // frc::XboxController object for the driver
   frc::XboxController driver_controller{ControllerConstants::driver_controller_port};
+
+  frc2::JoystickButton a_button{ &driver_controller, ControllerConstants::a_button_port };
+  frc2::JoystickButton b_button{ &driver_controller, ControllerConstants::b_button_port };
 
   // Configure button bindings will link specific buttons to various commands
   void ConfigureButtonBindings();
