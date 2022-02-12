@@ -31,7 +31,12 @@ This subsystem is in charge of launching the game pieces into the goal. Its goal
 - Stop: This stops the launcher motor
 
 ### Climber Subsystem
-TODO
+This subsystem is in charge of hooking onto a bar and lifting up the robot. ITs goal is to raise two arms with hooks onto the mid rung and pick its self up. This subsystem uses motor controllers to raise and lower the climber, it also uses sensors to stop the arms from going too far up or too far down. It also has servos that pulls and puts a pin in the climber that is used as a ratcheting system. Here are some of the function used in this subsystem:
+- Periodic: update the filter with the current velocity value of the speed controller
+- RaiseLeftClimber: this raises the left climber up the bar at a constant speed
+- LowerLeftClimber: this lowers the left climber up the bar at a constant speed
+- RaiseRightClimber: this raises the right climber up the bar at a constant speed
+- LowerRightClimber: this lowers the right climber up the bar at a constant speed
 
 ### Limelight Subsystem
 TODO
