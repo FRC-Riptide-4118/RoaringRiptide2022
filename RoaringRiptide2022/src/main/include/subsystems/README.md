@@ -5,8 +5,6 @@ This subsystem is in charge of controlling the robots general mobility. The core
 - Periodic: update the filter with the current velocity value of the left speed controller
 - CurvatureDrive: drive via a forward velocity and radius of curvature
 - ArcadeDrive: drive via a forward velocity and rotational velocity
-- SetHighGear: for robots with a shifting gearbox, this will set the high gear
-- SetLowGear: for robots with a shifting gearbox, this will set the low gear
 - ResetEncoder: this will set the encoders position to 0. Useful for mitigating accumulated error
 - DriveToDistance: this function will drive the robot a specific distance along a line (no ability to change orientation)
 - GetVelocity: this will return the left speed controllers (filtered!) velocity. Primarily for testing purposes
