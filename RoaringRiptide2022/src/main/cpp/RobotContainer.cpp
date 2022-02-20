@@ -7,24 +7,35 @@
 
 RobotContainer::RobotContainer() {
 
-  // Set up the Drive subsystem to have a default command that allows it to be driven via Xbox controller
-  // Required the use of lambda functions to set up
-  m_drive.SetDefaultCommand( DefaultDrive{ &m_drive, [this] {return driver_controller.GetLeftY(); }, [this] {return driver_controller.GetRightX(); } } );
-
   // Configure the button bindings
   ConfigureButtonBindings();
+
+  frc::Shuffleboard::GetTab("Game").Add(this->m_auto_chooser);
+  this->m_auto_chooser.SetDefaultOption("Nothing", &nothing_auto);
+
+  // frc::Shuffleboard::GetTab("Game").AddNumber("Filtered Velocity", [this] { return m_drive.GetVelocity(); } );
+  // frc::Shuffleboard::GetTab("Game").AddNumber("Unfiltered Velocity", [this] { return m_drive.GetUnfilteredVelocity(); } );
+
+  // Set up the Drive subsystem to have a default command that allows it to be driven via Xbox controller
+  // Required the use of lambda functions to set up
+  m_drive.SetDefaultCommand( DefaultDrive{ &m_drive, [this] {return driver_controller.GetLeftY(); }, [this] {return -driver_controller.GetRightX(); } } );
+  m_transfer.SetDefaultCommand( DefaultTransfer(&m_transfer) );
+  m_limelight.SetDefaultCommand( DefaultLimelight(&m_limelight) );
+  // m_launcher.SetDefaultCommand( DefaultLauncher(&m_launcher) );  
+  
 }
 
 void RobotContainer::ConfigureButtonBindings() {
 
   a_button.WhileHeld( &run_transfer_forward );
   b_button.WhileHeld( &run_transfer_backwards );
+  // x_button.ToggleWhenPressed( &run_launcher );
 
 }
 
 // TODO: Implement functionality when autonomous modes are added
 frc2::Command* RobotContainer::GetAutonomousCommand() {
 
-  return nullptr;
+  return this->m_auto_chooser.GetSelected();
 
 }

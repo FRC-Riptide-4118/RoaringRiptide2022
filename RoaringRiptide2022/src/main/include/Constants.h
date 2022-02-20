@@ -26,20 +26,20 @@
 namespace DriveConstants {
 
     // left motor controller IDs
-    const int left_talon_id = 0;
-    const int left_victor1_id = 4;
-    const int left_victor2_id = 5;
+    const int left_talon_id = 1;
+    const int left_victor1_id = 2;
+    const int left_victor2_id = 3;
 
     // right motor controller IDs
-    const int right_talon_id = 1;
-    const int right_victor1_id = 2;
-    const int right_victor2_id = 3;
+    const int right_talon_id = 0;
+    const int right_victor1_id = 4;
+    const int right_victor2_id = 5;
 
     // drive PID coefficients
     const PID_Coefficients drive_PID_coefficients(0, 0.03, 0, 0);
 
     // control drive mode (either curvature or arcade)
-    const int drive_mode = CURVATURE_DRIVE_MODE;
+    const int drive_mode = ARCADE_DRIVE_MODE;
 
     const double encoder_filter_cutoff_frequency = 0.1;
 
@@ -49,7 +49,7 @@ namespace DriveConstants {
 // IntakeConstants is a location for all constants related to the Intake
 namespace IntakeConstants {
 
-    const int motor_controller_id = 0;
+    const int motor_controller_id = 6;
     const int PCM_intake_arm_forward = 0;
     const int PCM_intake_arm_reverse = 0;
 
@@ -58,16 +58,18 @@ namespace IntakeConstants {
 // TransferConstants is a location for all constants related to the Transfer
 namespace TransferConstants {
 
-    const int motor_controller_id = 0;
+    const int motor_controller_id = 7;
 
-    const double transfer_speed = 0.5;
+    const double transfer_speed = 0.25;
 
 }
 
 namespace LauncherConstants {
 
-    const int motor_controller_id = 0;
+    const int motor_controller_id = 8;
     const PID_Coefficients launcher_PID_coefficients(0, 0.03, 0, 0);
+
+    const double setpoint = 10000;
 
 }
 
@@ -95,8 +97,5 @@ namespace ControllerConstants {
 
     // the primary Xbox controller is connected on port 0
     const int driver_controller_port = 0;
-
-    const int a_button_port = 0;
-    const int b_button_port = 1;
 
 }

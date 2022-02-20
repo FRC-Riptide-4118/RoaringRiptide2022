@@ -14,6 +14,7 @@ class Transfer : public frc2::SubsystemBase {
   void Periodic() override;
   void TransferFoward(void);
   void TransferBackward(void);
+  void TransferStop(void);
 
  private:
   WPI_VictorSPX transfer_motor = {TransferConstants::motor_controller_id};

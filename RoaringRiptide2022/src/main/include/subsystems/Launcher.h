@@ -7,12 +7,14 @@
 #include <frc2/command/SubsystemBase.h>
 #include <ctre/Phoenix.h>
 #include <Constants.h>
+#include <frc/smartdashboard/SmartDashboard.h>
+#include <frc/shuffleboard/Shuffleboard.h>
 
 class Launcher : public frc2::SubsystemBase {
  public:
   Launcher();
   void Periodic() override;
-  void RunToSpeed(double setpoint);
+  void RunToSpeed(void);
   void Stop(void);
 
  private:

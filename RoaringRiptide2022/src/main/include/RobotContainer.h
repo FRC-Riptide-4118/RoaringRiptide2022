@@ -7,14 +7,25 @@
 
 // all frc/frc2 includes
 #include <frc/XboxController.h>
+#include <frc/shuffleboard/Shuffleboard.h>
+#include <frc/smartdashboard/SmartDashboard.h>
+#include <frc/smartdashboard/SendableChooser.h>
 #include <frc2/command/Command.h>
+#include <frc2/command/SequentialCommandGroup.h>
 #include <frc2/command/RunCommand.h>
+#include <frc2/command/InstantCommand.h>
 #include <frc2/command/button/JoystickButton.h>
+#include <frc2/command/button/Button.h>
 // all subsystem includes
 #include <subsystems/Drive.h>
 #include <subsystems/Transfer.h>
+#include <subsystems/Limelight.h>
+#include <subsystems/Launcher.h>
 // all command includes
 #include <commands/DefaultDrive.h>
+#include <commands/DefaultTransfer.h>
+#include <commands/DefaultLimelight.h>
+#include <commands/DefaultLauncher.h>
 // all other includes
 #include <Constants.h>
 
@@ -36,20 +47,52 @@ class RobotContainer {
     frc2::Command* GetAutonomousCommand();
 
  private:
+
+  /* ----- SUBSYSTEM DECALARATIONS ----- */
+
   // Drive subsystem
   Drive m_drive;
   // Transfer subsystem
   Transfer m_transfer;
+  // Limelight subsystem
+  Limelight m_limelight;
+  // Launcher subsystem
+  // Launcher m_launcher;
+
+  // Create a sendable chooser to select which auto will be run
+  frc::SendableChooser<frc2::Command*> m_auto_chooser;
+
+  /* ----- SIMPLE COMMAND DECALARATIONS ---- */
 
   // various lambda functions to define commands
+  
+  // [TRANSFER]
   frc2::RunCommand run_transfer_forward{ [this] { m_transfer.TransferFoward(); }, {&m_transfer} };
   frc2::RunCommand run_transfer_backwards{ [this] { m_transfer.TransferBackward(); }, {&m_transfer} };
+  
+  // [LAUNCHER]
+  // frc2::RunCommand run_launcher{ [this] { m_launcher.RunToSpeed(); }, {&m_launcher} };
+
+  /* ----- AUTO DECLARATIONS ---- */
+
+  // Nothing auto
+  frc2::InstantCommand nothing_auto{ [this] { } };
+
+  frc2::SequentialCommandGroup drive_to_distance_auto{
+
+    frc2::InstantCommand{ [this] { m_drive.ResetEncoder(); }, {&m_drive}},
+    frc2::InstantCommand{ [this] { m_drive.DriveToDistance(10000); }, {&m_drive}}
+
+  };
+
+  /* ------ CONTROLLER/BUTTON DECLARATIONS ---- */
 
   // frc::XboxController object for the driver
   frc::XboxController driver_controller{ControllerConstants::driver_controller_port};
 
-  frc2::JoystickButton a_button{ &driver_controller, ControllerConstants::a_button_port };
-  frc2::JoystickButton b_button{ &driver_controller, ControllerConstants::b_button_port };
+  frc2::Button a_button{[&] { return driver_controller.GetAButton(); } };
+  frc2::Button b_button{[&] { return driver_controller.GetBButton(); } };
+  frc2::Button x_button{[&] { return driver_controller.GetXButton(); } };
 
   // Configure button bindings will link specific buttons to various commands
   void ConfigureButtonBindings();

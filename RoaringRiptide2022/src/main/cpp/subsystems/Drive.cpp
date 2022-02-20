@@ -13,7 +13,7 @@ Drive::Drive() {
     this->right_talon.ConfigFactoryDefault();
 
     // As of 2022, DifferentialDrive no longer automatically inverts direction
-    right.SetInverted(true);
+    left.SetInverted(true);
 
     // left motor controllers always follow this->left_talon
     this->left_victor1.Follow(this->left_talon);
@@ -25,12 +25,15 @@ Drive::Drive() {
 
     // disable safety to avoid weird errors
     drive.SetSafetyEnabled(false);
-    this->left_talon.ConfigSelectedFeedbackSensor(FeedbackDevice::CTRE_MagEncoder_Relative);
-    this->right_talon.ConfigSelectedFeedbackSensor(FeedbackDevice::CTRE_MagEncoder_Relative);
+    this->left_talon.ConfigSelectedFeedbackSensor(FeedbackDevice::QuadEncoder);
+    this->right_talon.ConfigSelectedFeedbackSensor(FeedbackDevice::QuadEncoder);
 
     // set the current encoder value to 0
     this->left_talon.SetSelectedSensorPosition(0);
     this->right_talon.SetSelectedSensorPosition(0);
+
+    this->left_talon.ConfigOpenloopRamp(2.8);
+    this->right_talon.ConfigOpenloopRamp(2.8);
 
     // set left PID coefficients for motor controllers
     this->left_talon.Config_kF(DriveConstants::left_talon_id, DriveConstants::drive_PID_coefficients.kF);
@@ -70,6 +73,12 @@ double Drive::GetVelocity() {
 
     // get the filtered velocity of just the left side
     return encoder_filter.Calculate( this->left_talon.GetSelectedSensorVelocity() );
+
+}
+
+double Drive::GetUnfilteredVelocity() {
+
+    return this->left_talon.GetSelectedSensorVelocity();
 
 }
 

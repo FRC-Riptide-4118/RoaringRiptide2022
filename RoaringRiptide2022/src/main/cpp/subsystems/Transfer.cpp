@@ -20,3 +20,9 @@ void Transfer::TransferBackward(void) {
     this->transfer_motor.Set(ControlMode::PercentOutput, -TransferConstants::transfer_speed);
 
 }
+
+void Transfer::TransferStop(void) {
+
+    this->transfer_motor.Set(ControlMode::PercentOutput, 0);
+
+}
