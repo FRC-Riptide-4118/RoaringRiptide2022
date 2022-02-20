@@ -5,24 +5,38 @@ This subsystem is in charge of controlling the robots general mobility. The core
 - Periodic: update the filter with the current velocity value of the left speed controller
 - CurvatureDrive: drive via a forward velocity and radius of curvature
 - ArcadeDrive: drive via a forward velocity and rotational velocity
-- SetHighGear: for robots with a shifting gearbox, this will set the high gear
-- SetLowGear: for robots with a shifting gearbox, this will set the low gear
 - ResetEncoder: this will set the encoders position to 0. Useful for mitigating accumulated error
 - DriveToDistance: this function will drive the robot a specific distance along a line (no ability to change orientation)
 - GetVelocity: this will return the left speed controllers (filtered!) velocity. Primarily for testing purposes
 - GetWheelSpeeds: this will return a set of left and right wheel speeds based on a linear and angular velocity of the differential drive
 
 ### Intake Subsystem
-TODO
+This subsystem is in charge of intaking the game pieces. Its goal is to pick up the game piece on the ground and put it on the transfer subsystem. This subsystem usses a motor controller that controlls the speed of the intake. It will also use a pnumatic piston to raise and lower the intake so its can be in frame peremeter. Here are some of the functions that thus subsystem usses:
+- Periodic: update the filter with the current velocity value of the speed controller
+- IntakeForward: runs the motors forward to intake the game piece at a certain speed
+- IntakeBackward: runs the motors backward to intake the game piece at a certain speed
+- LowerIntake: This lowers the intake to allow it to into contact with field elements
+- RaiseIntake: This raises the intake so that it fits within frame perimeter
 
 ### Transfer Subsystem
-TODO
+This subsystem is in charge of moving the game pieces between subsystems. Its goal is to move the game pieces from the intake subsystem to the launcher subsystem. This subsystem uses a motor controller to control the speed of the transfer. Here are some of the function used in this subsystem:
+- Periodic: update the filter with the current velocity value of the speed controller
+- TransferFoward: runs the motors forward to transfer the game piece at a certain speed
+- TransferBackward: runs the motors backwards to posibly unjam a stuck game peice
 
 ### Launcher Subsystem
-TODO
+This subsystem is in charge of launching the game pieces into the goal. Its goal is the launch the game peices into the upper hub. This subsystem usses a motor controller which can be found in the motor (falcon 500) that controlls the speed of the launch. Here are some of the function used in this subsystem:
+- Periodic: update the filter with the current velocity value of the speed controller
+- RunToSpeed: This runs the launcher motor up to the speed we want to launch the ball
+- Stop: This stops the launcher motor
 
 ### Climber Subsystem
-TODO
+This subsystem is in charge of hooking onto a bar and lifting up the robot. ITs goal is to raise two arms with hooks onto the mid rung and pick its self up. This subsystem uses motor controllers to raise and lower the climber, it also uses sensors to stop the arms from going too far up or too far down. It also has servos that pulls and puts a pin in the climber that is used as a ratcheting system. Here are some of the function used in this subsystem:
+- Periodic: update the filter with the current velocity value of the speed controller
+- RaiseLeftClimber: this raises the left climber up the bar at a constant speed
+- LowerLeftClimber: this lowers the left climber up the bar at a constant speed
+- RaiseRightClimber: this raises the right climber up the bar at a constant speed
+- LowerRightClimber: this lowers the right climber up the bar at a constant speed
 
 ### Limelight Subsystem
 TODO
