@@ -13,6 +13,7 @@
 #include <frc/kinematics/DifferentialDriveKinematics.h>
 #include <frc/kinematics/DifferentialDriveWheelSpeeds.h>
 #include <frc/kinematics/ChassisSpeeds.h>
+#include <frc/ADXRS450_Gyro.h>
 // CTRE/Phoenix include
 #include "ctre/Phoenix.h"
 // all other includes
@@ -34,6 +35,10 @@ class Drive : public frc2::SubsystemBase {
   void ResetEncoder();
   // Get the current (filtered) velocity
   double GetVelocity();
+  // Reset the gyroscope angle
+  void ResetAngle();
+  // Get the current gyroscope angle
+  double GetAngle();
   // Get the current (unfiltered) velocity
   double GetUnfilteredVelocity();
   // Get wheel speeds from drive kinematics definition (convert linear + angular velocity of chassis into left + right velocity)
@@ -59,5 +64,8 @@ class Drive : public frc2::SubsystemBase {
   frc::DifferentialDriveKinematics drive_kinematics{DriveConstants::track_width};
   // Filter for retrieving encoder information
   frc::LinearFilter<double> encoder_filter = frc::LinearFilter<double>::SinglePoleIIR(DriveConstants::encoder_filter_cutoff_frequency, ROBORIO_LOOP_PERIOD);
+  // gyroscope sensor
+  frc::ADXRS450_Gyro gyroscope;
+
 
 };

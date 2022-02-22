@@ -36,7 +36,8 @@ namespace DriveConstants {
     const int right_victor2_id = 5;
 
     // drive PID coefficients
-    const PID_Coefficients drive_PID_coefficients(0, 0.03, 0, 0);
+    const PID_Coefficients drive_PID_coefficients(0, 0.2, 2.0e-4, 0);
+    const PID_Coefficients rotate_PID_coefficients(0, 0.03, 0, 0);
 
     // control drive mode (either curvature or arcade)
     const int drive_mode = ARCADE_DRIVE_MODE;
@@ -44,6 +45,11 @@ namespace DriveConstants {
     const double encoder_filter_cutoff_frequency = 0.1;
 
     const auto track_width = 30_in;
+
+    const int setpoint = 10000;
+
+    const int gyroscope_cs = 0;
+
 }
 
 // IntakeConstants is a location for all constants related to the Intake
@@ -67,7 +73,7 @@ namespace TransferConstants {
 namespace LauncherConstants {
 
     const int motor_controller_id = 8;
-    const PID_Coefficients launcher_PID_coefficients(0, 0.03, 0, 0);
+    const PID_Coefficients launcher_PID_coefficients(0, 0.05, 0, 0);
 
     const double setpoint = 10000;
 

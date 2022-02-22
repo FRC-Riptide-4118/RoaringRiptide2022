@@ -32,20 +32,21 @@ Drive::Drive() {
     this->left_talon.SetSelectedSensorPosition(0);
     this->right_talon.SetSelectedSensorPosition(0);
 
+    // limit acceleration to avoid brownouts
     this->left_talon.ConfigOpenloopRamp(2.8);
     this->right_talon.ConfigOpenloopRamp(2.8);
 
     // set left PID coefficients for motor controllers
-    this->left_talon.Config_kF(DriveConstants::left_talon_id, DriveConstants::drive_PID_coefficients.kF);
-    this->left_talon.Config_kP(DriveConstants::left_talon_id, DriveConstants::drive_PID_coefficients.kP);
-    this->left_talon.Config_kI(DriveConstants::left_talon_id, DriveConstants::drive_PID_coefficients.kI);
-    this->left_talon.Config_kD(DriveConstants::left_talon_id, DriveConstants::drive_PID_coefficients.kD);
+    this->left_talon.Config_kF(0, DriveConstants::drive_PID_coefficients.kF);
+    this->left_talon.Config_kP(0, DriveConstants::drive_PID_coefficients.kP);
+    this->left_talon.Config_kI(0, DriveConstants::drive_PID_coefficients.kI);
+    this->left_talon.Config_kD(0, DriveConstants::drive_PID_coefficients.kD);
 
     // set right PID coefficients for motor controllers
-    this->right_talon.Config_kF(DriveConstants::right_talon_id, DriveConstants::drive_PID_coefficients.kF);
-    this->right_talon.Config_kP(DriveConstants::right_talon_id, DriveConstants::drive_PID_coefficients.kP);
-    this->right_talon.Config_kI(DriveConstants::right_talon_id, DriveConstants::drive_PID_coefficients.kI);
-    this->right_talon.Config_kD(DriveConstants::right_talon_id, DriveConstants::drive_PID_coefficients.kD);
+    this->right_talon.Config_kF(0, DriveConstants::drive_PID_coefficients.kF);
+    this->right_talon.Config_kP(0, DriveConstants::drive_PID_coefficients.kP);
+    this->right_talon.Config_kI(0, DriveConstants::drive_PID_coefficients.kI);
+    this->right_talon.Config_kD(0, DriveConstants::drive_PID_coefficients.kD);
 
     // disable sensor phase sensing
     this->left_talon.SetSensorPhase(false);
@@ -76,6 +77,18 @@ double Drive::GetVelocity() {
 
 }
 
+void Drive::ResetAngle() {
+
+    this->gyroscope.Reset();
+
+}
+
+double Drive::GetAngle() {
+
+    return this->gyroscope.GetAngle();
+
+}
+
 double Drive::GetUnfilteredVelocity() {
 
     return this->left_talon.GetSelectedSensorVelocity();
@@ -91,8 +104,8 @@ frc::DifferentialDriveWheelSpeeds Drive::GetWheelSpeeds(frc::ChassisSpeeds chs_s
 
 void Drive::DriveToDistance(double setpoint) {
 
-    this->left_talon.Set(ControlMode::Position, -setpoint);
-    this->right_talon.Set(ControlMode::Position, setpoint);
+    this->left_talon.Set(ControlMode::Position, setpoint);
+    this->right_talon.Set(ControlMode::Position, -setpoint);
 }
 
 void Drive::CurvatureDrive(double forward, double rotate) {

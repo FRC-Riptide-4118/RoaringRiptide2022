@@ -16,6 +16,11 @@
 #include <frc2/command/InstantCommand.h>
 #include <frc2/command/button/JoystickButton.h>
 #include <frc2/command/button/Button.h>
+#include <frc2/command/ConditionalCommand.h>
+#include <frc2/command/ParallelCommandGroup.h>
+#include <frc2/command/WaitCommand.h>
+#include <frc2/command/WaitUntilCommand.h>
+#include <frc2/command/ParallelRaceGroup.h>
 // all subsystem includes
 #include <subsystems/Drive.h>
 #include <subsystems/Transfer.h>
@@ -26,6 +31,7 @@
 #include <commands/DefaultTransfer.h>
 #include <commands/DefaultLimelight.h>
 #include <commands/DefaultLauncher.h>
+#include <commands/TurnToAngleGyro.h>
 // all other includes
 #include <Constants.h>
 
@@ -57,7 +63,7 @@ class RobotContainer {
   // Limelight subsystem
   Limelight m_limelight;
   // Launcher subsystem
-  // Launcher m_launcher;
+  Launcher m_launcher;
 
   // Create a sendable chooser to select which auto will be run
   frc::SendableChooser<frc2::Command*> m_auto_chooser;
@@ -71,7 +77,7 @@ class RobotContainer {
   frc2::RunCommand run_transfer_backwards{ [this] { m_transfer.TransferBackward(); }, {&m_transfer} };
   
   // [LAUNCHER]
-  // frc2::RunCommand run_launcher{ [this] { m_launcher.RunToSpeed(); }, {&m_launcher} };
+  frc2::RunCommand run_launcher{ [this] { m_launcher.RunToSpeed(); }, {&m_launcher} };
 
   /* ----- AUTO DECLARATIONS ---- */
 
@@ -80,8 +86,15 @@ class RobotContainer {
 
   frc2::SequentialCommandGroup drive_to_distance_auto{
 
-    frc2::InstantCommand{ [this] { m_drive.ResetEncoder(); }, {&m_drive}},
-    frc2::InstantCommand{ [this] { m_drive.DriveToDistance(10000); }, {&m_drive}}
+    frc2::InstantCommand{ [this] { m_drive.ResetEncoder(); }, {&m_drive} },
+    frc2::RunCommand{ [this] { m_drive.DriveToDistance(DriveConstants::setpoint); }, {&m_drive} }.WithTimeout(1_s)
+
+  };
+
+  frc2::SequentialCommandGroup turn_to_angle{
+
+    frc2::InstantCommand{ [this] { m_drive.ResetAngle(); }, {&m_drive} },
+    TurnToAngleGyro(&m_drive, 90).WithTimeout(2_s)
 
   };
 
@@ -92,7 +105,7 @@ class RobotContainer {
 
   frc2::Button a_button{[&] { return driver_controller.GetAButton(); } };
   frc2::Button b_button{[&] { return driver_controller.GetBButton(); } };
-  frc2::Button x_button{[&] { return driver_controller.GetXButton(); } };
+  frc2::Button right_bumper{[&] { return driver_controller.GetRightBumper(); } };
 
   // Configure button bindings will link specific buttons to various commands
   void ConfigureButtonBindings();
