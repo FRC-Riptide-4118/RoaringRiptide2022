@@ -35,6 +35,8 @@ class Drive : public frc2::SubsystemBase {
   void ResetEncoder();
   // Get the current (filtered) velocity
   double GetVelocity();
+  // Get the current left talon encoder count
+  double GetPosition();
   // Reset the gyroscope angle
   void ResetAngle();
   // Get the current gyroscope angle

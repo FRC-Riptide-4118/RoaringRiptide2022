@@ -77,6 +77,12 @@ double Drive::GetVelocity() {
 
 }
 
+double Drive::GetPosition() {
+
+    return this->left_talon.GetSelectedSensorPosition();
+
+}
+
 void Drive::ResetAngle() {
 
     this->gyroscope.Reset();

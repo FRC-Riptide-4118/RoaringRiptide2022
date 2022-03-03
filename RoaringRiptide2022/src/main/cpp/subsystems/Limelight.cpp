@@ -12,3 +12,16 @@ void Limelight::StandardView(void) {
     this->table->PutNumber("camMode", 1);
 
 }
+
+void Limelight::TrackingView(void) {
+
+    this->table->PutNumber("ledMode", 0);
+    this->table->PutNumber("camMode", 3);
+
+}
+
+double Limelight::GetHorizontalOffset(void) {
+
+    return this->table->GetNumber("tx", 0);
+
+}

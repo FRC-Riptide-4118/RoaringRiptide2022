@@ -12,6 +12,8 @@ class Limelight : public frc2::SubsystemBase {
  public:
   Limelight();
   void StandardView(void);
+  void TrackingView(void);
+  double GetHorizontalOffset(void);
 
  private:
   std::shared_ptr<nt::NetworkTable> table = nt::NetworkTableInstance::GetDefault().GetTable("limelight");

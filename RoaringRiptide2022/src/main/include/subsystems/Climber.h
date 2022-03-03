@@ -14,8 +14,10 @@ class Climber : public frc2::SubsystemBase {
  public:  
   Climber();
   void Periodic() override;
+  void Stop(void);
   void RaiseClimber(void);
   void LowerClimber(void);
+  int  GetLimitSwitches(void);
 
  private:
   WPI_VictorSPX climber_right_motor = {ClimberConstants::right_climber_motor_id};

@@ -13,12 +13,15 @@ class Intake : public frc2::SubsystemBase {
  public:
   Intake();
   void Periodic() override;
-  void IntakeForward(double setpoint);
-  void IntakeBackward(double setpoint);
+  void IntakeForward(void);
+  void IntakeBackward(void);
+  void Stop(void);
   void LowerIntake(void);
   void RaiseIntake(void);
+  void ToggleIntake(void);
 
  private:
+  bool intake_position;
   WPI_VictorSPX intake_motor = {IntakeConstants::motor_controller_id};
   frc::DoubleSolenoid intake_arm{ frc::PneumaticsModuleType::CTREPCM, IntakeConstants::PCM_intake_arm_forward, IntakeConstants::PCM_intake_arm_reverse };
 

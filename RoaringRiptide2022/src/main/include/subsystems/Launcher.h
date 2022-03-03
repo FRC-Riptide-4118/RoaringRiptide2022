@@ -15,6 +15,7 @@ class Launcher : public frc2::SubsystemBase {
   Launcher();
   void Periodic() override;
   void RunToSpeed(void);
+  bool AtSpeed(void);
   void Stop(void);
 
  private:

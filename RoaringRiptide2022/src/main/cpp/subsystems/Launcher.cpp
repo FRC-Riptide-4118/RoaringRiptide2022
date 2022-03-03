@@ -26,6 +26,12 @@ void Launcher::RunToSpeed(void) {
 
 }
 
+bool Launcher::AtSpeed(void) {
+
+    return this->launcher_motor.GetSelectedSensorVelocity() >= 0.9*LauncherConstants::setpoint;
+
+}
+
 void Launcher::Stop(void) {
 
     this->launcher_motor.Set(ControlMode::PercentOutput, 0);
