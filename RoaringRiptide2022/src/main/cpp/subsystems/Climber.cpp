@@ -37,7 +37,7 @@ void Climber::LowerClimber(void) {
     }
     else {
 
-        this->climber_left_motor.Set(ControlMode::PercentOutput, -ClimberConstants::climber_speed);
+        this->climber_left_motor.Set(ControlMode::PercentOutput, -ClimberConstants::climber_down_speed);
 
     }
 
@@ -48,7 +48,7 @@ void Climber::LowerClimber(void) {
     }
     else {
 
-        this->climber_right_motor.Set(ControlMode::PercentOutput, -ClimberConstants::climber_speed);
+        this->climber_right_motor.Set(ControlMode::PercentOutput, -ClimberConstants::climber_down_speed);
 
     }
 
@@ -68,7 +68,7 @@ void Climber::RaiseClimber(void) {
     }
     else {
 
-        this->climber_left_motor.Set(ControlMode::PercentOutput, ClimberConstants::climber_speed);
+        this->climber_left_motor.Set(ControlMode::PercentOutput, ClimberConstants::climber_up_speed);
 
     }
 
@@ -79,7 +79,7 @@ void Climber::RaiseClimber(void) {
     }
     else {
 
-        this->climber_right_motor.Set(ControlMode::PercentOutput, ClimberConstants::climber_speed);
+        this->climber_right_motor.Set(ControlMode::PercentOutput, ClimberConstants::climber_up_speed);
 
     }
 

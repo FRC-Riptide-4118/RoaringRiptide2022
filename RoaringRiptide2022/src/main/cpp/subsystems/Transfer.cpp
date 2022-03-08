@@ -4,7 +4,11 @@
 
 #include "subsystems/Transfer.h"
 
-Transfer::Transfer() = default;
+Transfer::Transfer() {
+
+    this->transfer_motor.SetInverted(true);
+
+}
 
 // This method will be called once per scheduler run
 void Transfer::Periodic() {}

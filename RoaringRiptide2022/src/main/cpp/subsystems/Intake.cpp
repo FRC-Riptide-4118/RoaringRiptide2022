@@ -36,13 +36,13 @@ void Intake::Stop(void) {
 
 void Intake::LowerIntake(void) {
 
-    this->intake_arm.Set(frc::DoubleSolenoid::kForward);
+    this->intake_arm.Set(frc::DoubleSolenoid::kReverse);
 
 }
 
 void Intake::RaiseIntake(void) {
 
-    this->intake_arm.Set(frc::DoubleSolenoid::kReverse);
+    this->intake_arm.Set(frc::DoubleSolenoid::kForward);
 
 }
 

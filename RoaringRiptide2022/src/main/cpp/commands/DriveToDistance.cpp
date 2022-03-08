@@ -8,6 +8,7 @@ DriveToDistance::DriveToDistance(Drive* m_drive, double setpoint) {
   
   this->m_drive = m_drive;
   this->setpoint = setpoint;
+  this->m_drive->ResetEncoder();
   AddRequirements({m_drive});
 
 }
@@ -21,5 +22,17 @@ void DriveToDistance::Execute() {
 
 // Returns true when the command should end.
 bool DriveToDistance::IsFinished() {
-  return this->m_drive->GetPosition() >= 0.95*this->setpoint;
+
+  if (this->setpoint > 0) {
+
+     return this->m_drive->GetPosition() >= 0.95*this->setpoint;
+
+  }
+  else {
+
+     return this->m_drive->GetPosition() <= 0.95*this->setpoint;
+
+  }
+
+ 
 }

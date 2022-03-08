@@ -13,11 +13,11 @@ TurnToAngleGyro::TurnToAngleGyro(Drive* drive, double angle)
           // This should return the measurement
           [drive] { return drive->GetAngle(); },
           // This should return the setpoint (can also be a constant)
-          [&angle] { return angle; },
+          [angle] { return angle; },
           // This uses the output
           [drive] (double output) {
             // Use the output here
-            drive->ArcadeDrive(0, output);
+            drive->ArcadeDrive(0, -output);
           }) {
 
             AddRequirements({drive});

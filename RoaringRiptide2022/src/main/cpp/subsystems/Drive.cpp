@@ -8,6 +8,10 @@
 // Drive constructor
 Drive::Drive() {
 
+    this->table->PutNumber("kP", DriveConstants::drive_PID_coefficients.kP);
+    this->table->PutNumber("kI", DriveConstants::drive_PID_coefficients.kI);
+    this->table->PutNumber("kD", DriveConstants::drive_PID_coefficients.kD);
+
     // Reset left/right talon information
     this->left_talon.ConfigFactoryDefault();
     this->right_talon.ConfigFactoryDefault();
@@ -109,6 +113,18 @@ frc::DifferentialDriveWheelSpeeds Drive::GetWheelSpeeds(frc::ChassisSpeeds chs_s
 }
 
 void Drive::DriveToDistance(double setpoint) {
+
+    // set left PID coefficients for motor controllers
+    this->left_talon.Config_kF(0, table->GetNumber("kF", DriveConstants::drive_PID_coefficients.kF));
+    this->left_talon.Config_kP(0, table->GetNumber("kP", DriveConstants::drive_PID_coefficients.kP));
+    this->left_talon.Config_kI(0, table->GetNumber("kI", DriveConstants::drive_PID_coefficients.kI));
+    this->left_talon.Config_kD(0, table->GetNumber("kD", DriveConstants::drive_PID_coefficients.kD));
+
+    // set right PID coefficients for motor controllers
+    this->right_talon.Config_kF(0, table->GetNumber("kF", DriveConstants::drive_PID_coefficients.kF));
+    this->right_talon.Config_kP(0, table->GetNumber("kP", DriveConstants::drive_PID_coefficients.kP));
+    this->right_talon.Config_kI(0, table->GetNumber("kI", DriveConstants::drive_PID_coefficients.kI));
+    this->right_talon.Config_kD(0, table->GetNumber("kD", DriveConstants::drive_PID_coefficients.kD));
 
     this->left_talon.Set(ControlMode::Position, setpoint);
     this->right_talon.Set(ControlMode::Position, -setpoint);

@@ -15,11 +15,13 @@ RobotContainer::RobotContainer() {
   this->m_auto_chooser.AddOption("Drive To Distance", &drive_to_distance_auto);
   this->m_auto_chooser.AddOption("Turn To Angle", &turn_to_angle_gyro);
   this->m_auto_chooser.AddOption("Complex 1", &complex_auto1);
+  this->m_auto_chooser.AddOption("Complex 2", &complex_auto2);
 
   // frc::Shuffleboard::GetTab("Game").AddNumber("Filtered Velocity", [this] { return m_drive.GetVelocity(); } );
   // frc::Shuffleboard::GetTab("Game").AddNumber("Unfiltered Velocity", [this] { return m_drive.GetUnfilteredVelocity(); } );
   frc::Shuffleboard::GetTab("Game").AddNumber("Angle", [this] { return m_drive.GetAngle(); } );
   frc::Shuffleboard::GetTab("Game").AddNumber("Limit Switch", [this] { return m_climber.GetLimitSwitches(); } );
+  frc::Shuffleboard::GetTab("Game").AddNumber("Position", [this] { return m_drive.GetPosition(); } );
 
   // Set up the Drive subsystem to have a default command that allows it to be driven via Xbox controller
   // Required the use of lambda functions to set up
@@ -34,13 +36,15 @@ RobotContainer::RobotContainer() {
 
 void RobotContainer::ConfigureButtonBindings() {
 
-  a_button.WhileHeld( &run_transfer_forward );
-  b_button.WhileHeld( &run_intake_forward );
-  x_button.WhileHeld( &raise_intake );
+  b_button.WhileHeld( &run_transfer_backwards );
+  a_button.WhileHeld( &run_intake_backward );
+  y_button.WhileHeld( TurnToAngleLimelight(&m_drive, &m_limelight) );
   right_bumper.ToggleWhenPressed( &run_launcher );
   left_bumper.WhenPressed( &toggle_intake );
   up_button.WhileHeld( &raise_climber );
   down_button.WhileHeld( &lower_climber );
+  left_trigger.WhileHeld( &run_intake_forward );
+  right_trigger.WhileHeld( &run_transfer_forward );
 
 }
 

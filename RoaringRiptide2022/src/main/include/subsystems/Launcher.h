@@ -9,6 +9,7 @@
 #include <Constants.h>
 #include <frc/smartdashboard/SmartDashboard.h>
 #include <frc/shuffleboard/Shuffleboard.h>
+#include <frc/shuffleboard/ShuffleboardTab.h>
 
 class Launcher : public frc2::SubsystemBase {
  public:
@@ -20,5 +21,6 @@ class Launcher : public frc2::SubsystemBase {
 
  private:
   TalonFX launcher_motor{LauncherConstants::motor_controller_id};
+  std::shared_ptr<nt::NetworkTable> table = nt::NetworkTableInstance::GetDefault().GetTable("launcher");
 
 };

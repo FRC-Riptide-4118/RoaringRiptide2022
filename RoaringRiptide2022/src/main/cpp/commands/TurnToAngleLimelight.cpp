@@ -21,7 +21,7 @@ TurnToAngleLimelight::TurnToAngleLimelight(Drive* m_drive, Limelight* m_limeligh
 
           }) {
 
-            AddRequirements({m_drive});
+            AddRequirements({m_drive, m_limelight});
 
           }
 

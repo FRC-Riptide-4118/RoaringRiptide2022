@@ -36,9 +36,9 @@ namespace DriveConstants {
     const int right_victor2_id = 5;
 
     // drive PID coefficients
-    const PID_Coefficients drive_PID_coefficients(0, 0.2, 2.0e-4, 0);
-    const PID_Coefficients gyro_PID_coefficients(0, 0.03, 0, 0);
-    const PID_Coefficients limelight_PID_coefficients(0, 0.03, 0, 0);
+    const PID_Coefficients drive_PID_coefficients(0, 0.1, 2.0e-5, 0);
+    const PID_Coefficients gyro_PID_coefficients(0, 0.008333, 0, 0);
+    const PID_Coefficients limelight_PID_coefficients(0, 0.035, 2.0e-5, 0);
 
     // control drive mode (either curvature or arcade)
     const int drive_mode = ARCADE_DRIVE_MODE;
@@ -46,8 +46,6 @@ namespace DriveConstants {
     const double encoder_filter_cutoff_frequency = 0.1;
 
     const auto track_width = 30_in;
-
-    const int setpoint = 10000;
 
     const int gyroscope_cs = 0;
 
@@ -60,7 +58,7 @@ namespace IntakeConstants {
     const int PCM_intake_arm_forward = 6;
     const int PCM_intake_arm_reverse = 7;
 
-    const double intake_speed = 1;
+    const double intake_speed = 0.75;
 
 }
 
@@ -69,7 +67,7 @@ namespace TransferConstants {
 
     const int motor_controller_id = 7;
 
-    const double transfer_speed = 0.5;
+    const double transfer_speed = 0.40;
 
 }
 
@@ -78,7 +76,7 @@ namespace LauncherConstants {
     const int motor_controller_id = 8;
     const PID_Coefficients launcher_PID_coefficients(0, 0.0025, 0.0001, 0);
 
-    const double setpoint = 20000;
+    const double setpoint = 15000;
 
 }
 
@@ -91,13 +89,15 @@ namespace ClimberConstants {
     const int bottom_left_limit_switch_port = 3;
     const int top_right_limit_switch_port = 0;
     const int bottom_right_limit_switch_port = 2;
+    
 
     const int left_servo_port = 9;
     const int right_servo_port = 0;
 
     const double servo_hold_value = 0.5;
 
-    const double climber_speed = 0.5;
+    const double climber_up_speed = 0.35;
+    const double climber_down_speed = 0.65;
 
 }
 

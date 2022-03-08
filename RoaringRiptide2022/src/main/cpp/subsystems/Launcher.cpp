@@ -6,6 +6,8 @@
 
 Launcher::Launcher() {
 
+    this->table->PutNumber("setpoint", LauncherConstants::setpoint);
+
     this->launcher_motor.SetInverted(true);
     this->launcher_motor.ConfigSupplyCurrentLimit(SupplyCurrentLimitConfiguration(true, 40, 35, 1.0));
     this->launcher_motor.ConfigSelectedFeedbackSensor(TalonFXFeedbackDevice::IntegratedSensor);
@@ -22,13 +24,13 @@ void Launcher::Periodic() {}
 
 void Launcher::RunToSpeed(void) {
 
-    this->launcher_motor.Set(ControlMode::Velocity, LauncherConstants::setpoint);
+    this->launcher_motor.Set(ControlMode::Velocity, this->table->GetNumber("setpoint", 0) );
 
 }
 
 bool Launcher::AtSpeed(void) {
 
-    return this->launcher_motor.GetSelectedSensorVelocity() >= 0.9*LauncherConstants::setpoint;
+    return this->launcher_motor.GetSelectedSensorVelocity() >= 0.9*this->table->GetNumber("setpoint", 0);
 
 }
 

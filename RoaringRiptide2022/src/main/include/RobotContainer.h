@@ -118,7 +118,7 @@ class RobotContainer {
   frc2::SequentialCommandGroup drive_to_distance_auto{
 
     reset_encoders,
-    DriveToDistance(&m_drive, DriveConstants::setpoint).WithTimeout(2_s)
+    DriveToDistance(&m_drive, 10000).WithTimeout(2_s)
 
   };
 
@@ -141,13 +141,42 @@ class RobotContainer {
   frc2::SequentialCommandGroup complex_auto1{
 
     reset_encoders,
+    reset_gyro,
+    lower_intake,
+    frc2::WaitCommand(200_ms),
+    DriveToDistance(&m_drive, -15000).WithTimeout(2_s),
+    LaunchAtSpeed(&m_transfer, &m_launcher).WithTimeout(4_s),
+    reset_encoders,
+    frc2::WaitCommand(200_ms),
+    DriveToDistance(&m_drive, -45000).WithTimeout(2_s)
+
+  };
+
+  // Complex 2
+  frc2::SequentialCommandGroup complex_auto2{
+
+    reset_encoders,
+    reset_gyro,
+    lower_intake,
+    frc2::WaitCommand(200_ms),
+    DriveToDistance(&m_drive, -15000).WithTimeout(2_s),
+    LaunchAtSpeed(&m_transfer, &m_launcher).WithTimeout(4_s),
+    reset_encoders,
+    frc2::WaitCommand(200_ms),
+    DriveToDistance(&m_drive, -45000).WithTimeout(2_s),
+    TurnToAngleGyro(&m_drive, -90).WithTimeout(2_s),
+    reset_encoders,
+    frc2::WaitCommand(200_ms),
+
     frc2::ParallelCommandGroup{
 
-      lower_intake,
-      LaunchAtSpeed(&m_transfer, &m_launcher),
-      DriveToDistance(&m_drive, DriveConstants::setpoint).WithTimeout(2_s)
+        DriveToDistance(&m_drive, 40000).WithTimeout(2_s),
+        run_intake_forward
 
-    }
+    }.WithTimeout(3_s),
+    
+    TurnToAngleGyro(&m_drive, 0).WithTimeout(2_s),
+    LaunchAtSpeed(&m_transfer, &m_launcher)
 
   };
 
@@ -156,14 +185,16 @@ class RobotContainer {
   // frc::XboxController object for the driver
   frc::XboxController driver_controller{ControllerConstants::driver_controller_port};
 
-  frc2::Button a_button{[&] { return driver_controller.GetAButton(); } };
-  frc2::Button b_button{[&] { return driver_controller.GetBButton(); } };
+  frc2::Button a_button{[&] { return driver_controller.GetAButton(); } }; // transfer reverse
+  frc2::Button b_button{[&] { return driver_controller.GetBButton(); } }; // intake reverse
   frc2::Button x_button{[&] { return driver_controller.GetXButton(); } };
   frc2::Button y_button{[&] { return driver_controller.GetYButton(); } };
-  frc2::Button right_bumper{[&] { return driver_controller.GetRightBumper(); } };
-  frc2::Button left_bumper{[&] { return driver_controller.GetLeftBumper(); } };
-  frc2::Button up_button{[&] { return driver_controller.GetPOV() == 0; } };
-  frc2::Button down_button{[&] { return driver_controller.GetPOV() == 180; } };
+  frc2::Button right_bumper{[&] { return driver_controller.GetRightBumper(); } }; // toggle launcher
+  frc2::Button left_bumper{[&] { return driver_controller.GetLeftBumper(); } }; // toggle intake up/down
+  frc2::Button up_button{[&] { return driver_controller.GetPOV() == 0; } }; // climber up
+  frc2::Button down_button{[&] { return driver_controller.GetPOV() == 180; } }; // climber down
+  frc2::Button left_trigger{[&] { return driver_controller.GetLeftTriggerAxis() > 0.5; } }; // intake run forward
+  frc2::Button right_trigger{[&] { return driver_controller.GetRightTriggerAxis() > 0.5; } }; // transfer forward
 
   // Configure button bindings will link specific buttons to various commands
   void ConfigureButtonBindings();

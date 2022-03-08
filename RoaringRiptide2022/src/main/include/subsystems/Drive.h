@@ -14,6 +14,7 @@
 #include <frc/kinematics/DifferentialDriveWheelSpeeds.h>
 #include <frc/kinematics/ChassisSpeeds.h>
 #include <frc/ADXRS450_Gyro.h>
+#include <frc/shuffleboard/Shuffleboard.h>
 // CTRE/Phoenix include
 #include "ctre/Phoenix.h"
 // all other includes
@@ -68,6 +69,8 @@ class Drive : public frc2::SubsystemBase {
   frc::LinearFilter<double> encoder_filter = frc::LinearFilter<double>::SinglePoleIIR(DriveConstants::encoder_filter_cutoff_frequency, ROBORIO_LOOP_PERIOD);
   // gyroscope sensor
   frc::ADXRS450_Gyro gyroscope;
+  // network tables pointer
+  std::shared_ptr<nt::NetworkTable> table = nt::NetworkTableInstance::GetDefault().GetTable("drive");
 
 
 };
