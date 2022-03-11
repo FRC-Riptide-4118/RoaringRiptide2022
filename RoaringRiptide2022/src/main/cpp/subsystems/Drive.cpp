@@ -37,8 +37,8 @@ Drive::Drive() {
     this->right_talon.SetSelectedSensorPosition(0);
 
     // limit acceleration to avoid brownouts
-    this->left_talon.ConfigOpenloopRamp(2.8);
-    this->right_talon.ConfigOpenloopRamp(2.8);
+    // this->left_talon.ConfigOpenloopRamp(2.8);
+    // this->right_talon.ConfigOpenloopRamp(2.8);
 
     // set left PID coefficients for motor controllers
     this->left_talon.Config_kF(0, DriveConstants::drive_PID_coefficients.kF);
