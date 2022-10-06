@@ -94,7 +94,8 @@ namespace ClimberConstants {
     const int left_servo_port = 9;
     const int right_servo_port = 0;
 
-    const double servo_hold_value = 0.5;
+    const double servo_down_value = 0.5;
+    const double servo_up_value = 0;
 
     const double climber_up_speed = 0.35;
     const double climber_down_speed = 0.65;

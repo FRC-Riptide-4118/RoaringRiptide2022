@@ -31,4 +31,9 @@ class Climber : public frc2::SubsystemBase {
   frc::Servo left_servo{ClimberConstants::left_servo_port};
   frc::Servo right_servo{ClimberConstants::right_servo_port};
 
+  int topLeft_latch;
+  int topRight_latch;
+  int bottomLeft_latch;
+  int bottomRight_latch;
+
 };

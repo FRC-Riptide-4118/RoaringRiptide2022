@@ -148,7 +148,7 @@ class RobotContainer {
     LaunchAtSpeed(&m_transfer, &m_launcher).WithTimeout(4_s),
     reset_encoders,
     frc2::WaitCommand(200_ms),
-    DriveToDistance(&m_drive, -45000).WithTimeout(2_s)
+    DriveToDistance(&m_drive, -40000).WithTimeout(2_s)
 
   };
 

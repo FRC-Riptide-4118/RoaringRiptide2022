@@ -11,6 +11,11 @@ Climber::Climber() {
     this->left_servo.Set(0);
     this->right_servo.Set(0);
 
+    this->topLeft_latch = 0;
+    this->topRight_latch = 0;
+    this->bottomLeft_latch = 0;
+    this->bottomRight_latch = 0;
+
 }
 
 // This method will be called once per scheduler run
@@ -27,28 +32,44 @@ void Climber::LowerClimber(void) {
 
     int limit_switches = this->GetLimitSwitches();
 
-    this->left_servo.Set(0.5);
-    this->right_servo.Set(0.5);
+    this->left_servo.Set(ClimberConstants::servo_down_value);
+    this->right_servo.Set(ClimberConstants::servo_down_value);
+
+    this->topLeft_latch = 0;
+    this->topRight_latch = 0;
 
     if (limit_switches & 0b0010) {
 
-        this->climber_left_motor.Set(ControlMode::PercentOutput, 0);
-
-    }
-    else {
-
-        this->climber_left_motor.Set(ControlMode::PercentOutput, -ClimberConstants::climber_down_speed);
+        this->bottomLeft_latch = 1;
 
     }
 
     if (limit_switches & 0b1000) {
 
-        this->climber_right_motor.Set(ControlMode::PercentOutput, 0);
+        this->bottomRight_latch = 1;
+
+    }
+
+    if (!this->bottomLeft_latch) {
+
+        this->climber_left_motor.Set(ControlMode::PercentOutput, -ClimberConstants::climber_down_speed);
+        
 
     }
     else {
 
+       this->climber_left_motor.Set(ControlMode::PercentOutput, 0);
+
+    }
+
+    if (!this->bottomRight_latch) {
+
         this->climber_right_motor.Set(ControlMode::PercentOutput, -ClimberConstants::climber_down_speed);
+
+    }
+    else {
+
+        this->climber_right_motor.Set(ControlMode::PercentOutput, 0);
 
     }
 
@@ -58,28 +79,43 @@ void Climber::RaiseClimber(void) {
 
     int limit_switches = this->GetLimitSwitches();
 
-    this->left_servo.Set(0);
-    this->right_servo.Set(0);
+    this->left_servo.Set(ClimberConstants::servo_up_value);
+    this->right_servo.Set(ClimberConstants::servo_up_value);
+    
+    this->bottomRight_latch = 0;
+    this->bottomLeft_latch = 0;
 
     if (limit_switches & 0b0001) {
 
-        this->climber_left_motor.Set(ControlMode::PercentOutput, 0);
-
-    }
-    else {
-
-        this->climber_left_motor.Set(ControlMode::PercentOutput, ClimberConstants::climber_up_speed);
+        this->topLeft_latch = 1;
 
     }
 
     if (limit_switches & 0b0100) {
 
-        this->climber_right_motor.Set(ControlMode::PercentOutput, 0);
+        this->topRight_latch = 1;
+
+    }
+
+    if (!this->topLeft_latch) {
+
+        this->climber_left_motor.Set(ControlMode::PercentOutput, ClimberConstants::climber_up_speed);
 
     }
     else {
 
+        this->climber_left_motor.Set(ControlMode::PercentOutput, 0);
+
+    }
+
+    if (!this->topRight_latch) {
+
         this->climber_right_motor.Set(ControlMode::PercentOutput, ClimberConstants::climber_up_speed);
+
+    }
+    else {
+
+        this->climber_right_motor.Set(ControlMode::PercentOutput, 0);
 
     }
 
